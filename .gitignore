@@ -20,6 +20,9 @@
 *.iml
 *.iws
 
+# FRC Robot
+.wpilib
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
