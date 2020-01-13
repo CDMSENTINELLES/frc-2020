@@ -1,10 +1,12 @@
 package ca.qc.cdm.sentinelles;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
     private RobotContainer robotContainer;
+    private Command autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -12,8 +14,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-        // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
     }
 
@@ -38,7 +38,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        robotContainer.getAutonomousCommand().schedule();
+        autonomousCommand = robotContainer.getAutonomousCommand();
+        autonomousCommand.schedule();
     }
 
     @Override
@@ -47,5 +48,6 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
+        autonomousCommand.cancel();
     }
 }
