@@ -1,14 +1,11 @@
 package ca.qc.cdm.sentinelles;
 
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class RobotContainer {
-    final Subsystem aa = new Subsystem() {
-
-    };
 
 
-
-
-
+    public CommandScheduler getAutonomousCommand() {
+        return null;
+    }
 }
