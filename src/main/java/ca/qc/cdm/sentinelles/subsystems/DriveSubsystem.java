@@ -1,15 +1,8 @@
 package ca.qc.cdm.sentinelles.subsystems;
 
-import com.ctre.phoenix.motorcontrol.FollowerType;
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import static ca.qc.cdm.sentinelles.Constants.DriveConstants.*;
 import static com.ctre.phoenix.motorcontrol.InvertType.FollowMaster;
 
 public class DriveSubsystem extends SubsystemBase {

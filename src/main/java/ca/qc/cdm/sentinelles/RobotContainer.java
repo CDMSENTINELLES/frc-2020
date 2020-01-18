@@ -4,6 +4,7 @@ import ca.qc.cdm.sentinelles.Constants.OIConstants;
 import ca.qc.cdm.sentinelles.commands.NullCommand;
 import ca.qc.cdm.sentinelles.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -11,7 +12,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
     private final DriveSubsystem drive = new DriveSubsystem();
-    private XboxController xboxController = new XboxController(OIConstants.kDriverControllerPort);
+    Joystick joystick = new Joystick(1);
+//    private XboxController xboxController = new XboxController(OIConstants.kDriverControllerPort);
 
     private final Command autoCommand = new NullCommand();
 
@@ -22,8 +24,8 @@ public class RobotContainer {
                 // A split-stick arcade command, with forward/backward controlled by the left
                 // hand, and turning controlled by the right.
                 new RunCommand(() -> drive
-                        .arcadeDrive(xboxController.getY(GenericHID.Hand.kLeft),
-                                xboxController.getX(GenericHID.Hand.kRight)), drive));
+                        .arcadeDrive(joystick.getY(GenericHID.Hand.kLeft),
+                                joystick.getX(GenericHID.Hand.kRight)), drive));
 
     }
 

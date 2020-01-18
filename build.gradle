@@ -23,6 +23,7 @@ deploy {
             targets << "roborio"
             // Debug can be overridden by command line, for use with VSCode
             debug = frc.getDebugOrDefault(false)
+            jvmArgs = ["-XX:+HeapDumpOnOutOfMemoryError", "-XX:HeapDumpPath=/home/lvuser"]
         }
         fileTreeArtifact('frcStaticFileDeploy') {
             files = fileTree(dir: 'src/main/deploy')
