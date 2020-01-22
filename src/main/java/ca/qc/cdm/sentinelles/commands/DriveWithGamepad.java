@@ -1,12 +1,12 @@
 package ca.qc.cdm.sentinelles.commands;
 
-import ca.qc.cdm.sentinelles.Constants;
 import ca.qc.cdm.sentinelles.OI;
 import ca.qc.cdm.sentinelles.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import static ca.qc.cdm.sentinelles.Constants.*;
+import static ca.qc.cdm.sentinelles.Constants.LEFT_JOYSTICK;
+import static ca.qc.cdm.sentinelles.Constants.RIGHT_JOYSTICK;
 
 public class DriveWithGamepad extends CommandBase {
     double powerScale = 0.45;
