@@ -1,12 +1,13 @@
 package ca.qc.cdm.sentinelles;
 
+import ca.qc.cdm.sentinelles.commands.NullCommand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
     private RobotContainer robotContainer;
-    private Command autonomousCommand;
+    private Command autonomousCommand = new NullCommand();
 
     /**
      * This function is run when the robot is first started up and should be used for any
