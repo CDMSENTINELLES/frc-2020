@@ -19,7 +19,6 @@ public class JoystickDrive extends CommandBase {
 
     @Override
     public void execute() {
-        System.out.println("Executing Joystick Drive.");
         Joystick joystick = new Joystick(0);
         double move = joystick.getX();
         double rotate = joystick.getY();

@@ -1,5 +1,6 @@
 package ca.qc.cdm.sentinelles;
 
+import ca.qc.cdm.sentinelles.commands.NullCommand;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -20,6 +21,7 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         robotContainer = new RobotContainer();
+        autonomousCommand = new NullCommand();
     }
 
     /**
