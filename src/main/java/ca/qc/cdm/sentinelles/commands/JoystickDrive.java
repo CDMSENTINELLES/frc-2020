@@ -14,9 +14,12 @@ public class JoystickDrive extends CommandBase {
         addRequirements(driveSubsystem);
     }
 
+
     @Override
     public void initialize() {
         System.out.println("Init DriveTrain Joystick Drive.");
+        // Get Buttons from Joystick
+
     }
 
     @Override
@@ -25,6 +28,9 @@ public class JoystickDrive extends CommandBase {
         double move = joystick.getX();
         double rotate = joystick.getY();
 
+
         driveSubsystem.drive(move, rotate);
     }
+
+
 }

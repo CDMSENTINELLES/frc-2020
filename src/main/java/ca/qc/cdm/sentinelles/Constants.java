@@ -11,6 +11,6 @@ public class Constants {
         public static final int leftMaster = 1;
         public static final int leftSlave = 2;
         public static final int rightMaster = 3;
-        public static final int rightSalve = 4;
+        public static final int rightSlave = 4;
     }
 }
