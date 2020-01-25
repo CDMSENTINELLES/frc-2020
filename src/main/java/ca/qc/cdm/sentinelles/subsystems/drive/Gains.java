@@ -1,4 +1,4 @@
-package ca.qc.cdm.sentinelles;
+package ca.qc.cdm.sentinelles.subsystems.drive;
 
 public class Gains {
     public final double kP;

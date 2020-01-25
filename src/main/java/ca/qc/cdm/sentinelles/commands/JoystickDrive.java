@@ -1,17 +1,15 @@
 package ca.qc.cdm.sentinelles.commands;
 
-import ca.qc.cdm.sentinelles.subsystems.DriveTrain;
+import ca.qc.cdm.sentinelles.subsystems.drive.DriveSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import static ca.qc.cdm.sentinelles.Constants.DriveConstants.frontLeftDrive;
-
 public class JoystickDrive extends CommandBase {
-    private final DriveTrain driveTrain;
+    private final DriveSubsystem driveSubsystem;
 
-    public JoystickDrive(DriveTrain driveTrain) {
-        this.driveTrain = driveTrain;
-        addRequirements(driveTrain);
+    public JoystickDrive(DriveSubsystem driveSubsystem) {
+        this.driveSubsystem = driveSubsystem;
+        addRequirements(driveSubsystem);
     }
 
     @Override
@@ -25,9 +23,7 @@ public class JoystickDrive extends CommandBase {
         Joystick joystick = new Joystick(0);
         double move = joystick.getX();
         double rotate = joystick.getY();
-        double motorOutput = frontLeftDrive.getMotorOutputPercent();
 
-        _sb.append
-        driveTrain.drive(move, rotate);
+        driveSubsystem.drive(move, rotate);
     }
 }
