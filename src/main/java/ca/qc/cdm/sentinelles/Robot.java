@@ -1,13 +1,16 @@
 package ca.qc.cdm.sentinelles;
 
-import ca.qc.cdm.sentinelles.commands.NullCommand;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+import static ca.qc.cdm.sentinelles.Constants.DriveConstants.*;
+
 public class Robot extends TimedRobot {
     private RobotContainer robotContainer;
-    private Command autonomousCommand = new NullCommand();
+    private Command autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -15,7 +18,55 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+
         robotContainer = new RobotContainer();
+
+        // Drive Init
+
+        frontLeftDrive.configFactoryDefault();
+        frontRightDrive.configFactoryDefault();
+        backLeftDrive.configFactoryDefault();
+        backRightDrive.configFactoryDefault();
+
+        frontLeftDrive.setInverted(false);
+        frontRightDrive.setInverted(true);
+        backLeftDrive.setInverted(false);
+        backRightDrive.setInverted(true);
+
+        drive.setRightSideInverted(false);
+
+        backLeftDrive.follow(frontLeftDrive);
+        backRightDrive.follow(backRightDrive);
+
+        frontLeftDrive.configVoltageCompSaturation(11.5, kTimeoutMs);
+        frontRightDrive.configVoltageCompSaturation(11.5, kTimeoutMs);
+        backLeftDrive.configVoltageCompSaturation(11.5, kTimeoutMs);
+        backRightDrive.configVoltageCompSaturation(11.5, kTimeoutMs);
+
+        frontRightDrive.enableVoltageCompensation(true);
+        frontLeftDrive.enableVoltageCompensation(true);
+        backRightDrive.enableVoltageCompensation(true);
+        backLeftDrive.enableVoltageCompensation(true);
+
+        frontRightDrive.configVoltageMeasurementFilter(32, kTimeoutMs);
+        frontLeftDrive.configVoltageMeasurementFilter(32, kTimeoutMs);
+        backLeftDrive.configVoltageMeasurementFilter(32, kTimeoutMs);
+        backRightDrive.configVoltageMeasurementFilter(32, kTimeoutMs);
+
+        frontLeftDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0, kTimeoutMs);
+        frontRightDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0, kTimeoutMs);
+        backRightDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0, kTimeoutMs);
+        backLeftDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,0, kTimeoutMs);
+
+        frontLeftDrive.configOpenloopRamp(3);
+        frontRightDrive.configOpenloopRamp(3);
+
+        frontRightDrive.configClosedloopRamp(0);
+        frontLeftDrive.configClosedloopRamp(0);
+
+        backLeftDrive.follow(frontLeftDrive);
+        backRightDrive.follow(frontRightDrive);
+
     }
 
     /**
