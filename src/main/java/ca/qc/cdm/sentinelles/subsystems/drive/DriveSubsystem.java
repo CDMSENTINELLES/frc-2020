@@ -23,10 +23,10 @@ public class DriveSubsystem extends SubsystemBase {
     public DriveSubsystem() {
         super();
         init();
-
     }
 
     private void init() {
+        System.out.println("Init DriveTrain Subsystem.");
         drive.setRightSideInverted(false);
     }
 

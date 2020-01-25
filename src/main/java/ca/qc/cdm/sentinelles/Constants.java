@@ -1,6 +1,10 @@
 package ca.qc.cdm.sentinelles;
 
 public class Constants {
+    public static final class JoystickConstants {
+        public static final int joystickPort = 0;
+    }
+
     public static final class DriveConstants {
         public static final int kTimeoutMs = 10;
 

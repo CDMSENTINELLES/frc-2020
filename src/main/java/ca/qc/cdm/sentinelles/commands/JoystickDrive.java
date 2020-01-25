@@ -4,6 +4,8 @@ import ca.qc.cdm.sentinelles.subsystems.drive.DriveSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+import static ca.qc.cdm.sentinelles.Constants.JoystickConstants.joystickPort;
+
 public class JoystickDrive extends CommandBase {
     private final DriveSubsystem driveSubsystem;
 
@@ -19,7 +21,7 @@ public class JoystickDrive extends CommandBase {
 
     @Override
     public void execute() {
-        Joystick joystick = new Joystick(0);
+        Joystick joystick = new Joystick(joystickPort);
         double move = joystick.getX();
         double rotate = joystick.getY();
 
