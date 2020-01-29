@@ -9,6 +9,5 @@ public class Shooter extends SubsystemBase {
     }
 
     private void init() {
-
     }
 }

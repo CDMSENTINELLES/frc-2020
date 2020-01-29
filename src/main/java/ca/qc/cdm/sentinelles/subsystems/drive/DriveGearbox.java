@@ -84,7 +84,6 @@ public class DriveGearbox {
         master.setSensorPhase(sensorPhase);
         slave.setSensorPhase(sensorPhase);
 
-
         motors.forEach(motor -> {
             motor.configFactoryDefault();
 
@@ -101,12 +100,9 @@ public class DriveGearbox {
             motor.configVoltageMeasurementFilter(32, kTimeoutMs);
 
             motor.setNeutralMode(NeutralMode.Brake);
-
         });
 
         zeroSensors();
-
-
     }
 
     public void zeroSensors() {

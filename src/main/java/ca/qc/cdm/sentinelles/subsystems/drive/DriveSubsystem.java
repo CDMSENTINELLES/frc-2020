@@ -14,9 +14,6 @@ public class DriveSubsystem extends SubsystemBase {
             rightDriveGearbox.master()
     );
 
-    public static final int kSlotIdx = 0;
-    public static final int kPIDLoopIdx = 0;
-
     /**
      * Creates a new DriveSubsystem.
      */

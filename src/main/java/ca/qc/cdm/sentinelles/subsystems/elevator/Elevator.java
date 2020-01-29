@@ -9,6 +9,5 @@ public class Elevator extends SubsystemBase {
     }
 
     private void init() {
-
     }
 }
