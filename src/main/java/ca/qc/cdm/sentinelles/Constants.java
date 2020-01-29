@@ -12,4 +12,8 @@ public class Constants {
         public static final int rightMaster = 3;
         public static final int rightSlave = 4;
     }
+
+    public static final class Shuffleboard {
+        public static final String DRIVE_TRAIN_TAB = "Drive Train";
+    }
 }
