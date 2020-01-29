@@ -2,7 +2,7 @@ package ca.qc.cdm.sentinelles.commands;
 
 import ca.qc.cdm.sentinelles.subsystems.drive.DriveSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import static ca.qc.cdm.sentinelles.Constants.JoystickConstants.joystickPort;
@@ -28,8 +28,7 @@ public class JoystickDrive extends CommandBase {
         double move = joystick.getX();
         double rotate = joystick.getY();
 
-        SmartDashboard.putNumber("DriveTrain Move", move);
-        SmartDashboard.putNumber("DriveTrain rotate", rotate);
+        Shuffleboard.getTab("Drive").addPersistent("Speed", move);
 
         driveSubsystem.drive(move, rotate);
     }
