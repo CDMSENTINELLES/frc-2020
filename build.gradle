@@ -48,13 +48,17 @@ test {
 }
 
 dependencies {
-    compile wpi.deps.wpilib()
-    compile wpi.deps.vendor.java()
+    implementation wpi.deps.wpilib()
+    nativeZip wpi.deps.wpilibJni(wpi.platforms.roborio)
+    nativeDesktopZip wpi.deps.wpilibJni(wpi.platforms.desktop)
+
+    implementation wpi.deps.vendor.java()
+    nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
+    nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
+
     compile 'edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java:2020.1.2'
     compile 'edu.wpi.first.hal:hal-jni:2020.1.2'
     compile 'com.google.dagger:dagger:2.25.4'
-    nativeZip wpi.deps.vendor.jni(wpi.platforms.desktop)
-    nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
 
     annotationProcessor "com.google.dagger:dagger-compiler:2.25.4"
 
