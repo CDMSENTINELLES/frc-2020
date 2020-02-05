@@ -2,33 +2,29 @@ package ca.qc.cdm.sentinelles.commands;
 
 import ca.qc.cdm.sentinelles.subsystems.drive.DriveSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import static ca.qc.cdm.sentinelles.Constants.JoystickConstants.joystickPort;
+import static ca.qc.cdm.sentinelles.Constants.JoystickConstants.JOYSTICK_PORT;
 
 public class JoystickDrive extends CommandBase {
     private final DriveSubsystem driveSubsystem;
+    private final Joystick joystick;
 
     public JoystickDrive(DriveSubsystem driveSubsystem) {
         this.driveSubsystem = driveSubsystem;
+        this.joystick =  new Joystick(JOYSTICK_PORT);
         addRequirements(driveSubsystem);
     }
 
     @Override
     public void initialize() {
-        System.out.println("Init DriveTrain Joystick Drive.");
-        // Get Buttons from Joystick
+        System.out.println("Init Joystick Drive.");
     }
 
     @Override
     public void execute() {
-        Joystick joystick = new Joystick(joystickPort);
-
         double move = joystick.getX();
         double rotate = joystick.getY();
-
-        Shuffleboard.getTab("Drive").addPersistent("Speed", move);
 
         driveSubsystem.drive(move, rotate);
     }
