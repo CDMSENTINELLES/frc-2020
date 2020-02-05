@@ -3,6 +3,7 @@ package ca.qc.cdm.sentinelles;
 import ca.qc.cdm.sentinelles.commands.JoystickDrive;
 import ca.qc.cdm.sentinelles.commands.NullCommand;
 import ca.qc.cdm.sentinelles.subsystems.drive.DriveSubsystem;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
@@ -11,6 +12,7 @@ public class RobotContainer {
 
     // Init Commands
     private final Command autoCommand = new NullCommand();
+
     public final JoystickDrive joystickDrive = new JoystickDrive(drivetrain);
 
     public RobotContainer() {
