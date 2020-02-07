@@ -27,4 +27,10 @@ public class Constants {
         public static final int storage1 = 14;
         public static final int storage2 = 15;
     }
+
+    public static final class VisionConstants {
+        public static final int targetHeightInchCollect = 11;
+        public static final double targetHeightInchLaunch = 81.25;
+        public static final double cameraHeightInch = 10;
+    }
 }
