@@ -36,7 +36,6 @@ public class DriveGearbox {
         slave.follow(master);
 
         // Configure Encoder
-
         master.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, kTimeoutMs);
 
         master.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 20, kTimeoutMs);

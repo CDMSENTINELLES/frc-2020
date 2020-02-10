@@ -16,7 +16,7 @@ public class Dashboard {
         ShuffleboardTab driveTab = Shuffleboard.getTab("Drivetrain");
         speedEntry = driveTab.add("Speed", 0)
                 .withWidget(BuiltInWidgets.kGraph)
-                .withProperties(Map.of("Min", 0, "Max", 100))
+                .withProperties(Map.of("Min", -1, "Max", 1))
                 .withPosition(0,0)
                 .withSize(3,3)
                 .getEntry();
