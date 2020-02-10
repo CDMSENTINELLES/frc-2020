@@ -6,8 +6,11 @@ import ca.qc.cdm.sentinelles.subsystems.drive.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
+    // Init Dashboard
+    public final Dashboard dashboard = new Dashboard();
+
     // Init Subsystems
-    public final DriveSubsystem drivetrain = new DriveSubsystem();
+    public final DriveSubsystem drivetrain = new DriveSubsystem(dashboard.speedEntry());
 
     // Init Commands
     private final Command autoCommand = new NullCommand();
