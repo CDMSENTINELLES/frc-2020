@@ -1,0 +1,75 @@
+plugins {
+    id "java"
+    id "idea"
+    id "eclipse"
+    id "edu.wpi.first.GradleRIO" version "2020.2.2"
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+def ROBOT_MAIN_CLASS = "ca.qc.cdm.sentinelles.Main"
+
+// Define my targets (RoboRIO) and artifacts (deployable files)
+// This is added by GradleRIO's backing project EmbeddedTools.
+deploy {
+    targets {
+        roboRIO("roborio") {
+            team = frc.getTeamOrDefault(7574)
+        }
+    }
+    artifacts {
+        frcJavaArtifact('frcJava') {
+            targets << "roborio"
+            // Debug can be overridden by command line, for use with VSCode
+            debug = frc.getDebugOrDefault(false)
+            jvmArgs = ["-XX:+HeapDumpOnOutOfMemoryError", "-XX:HeapDumpPath=/home/lvuser"]
+        }
+        fileTreeArtifact('frcStaticFileDeploy') {
+            files = fileTree(dir: 'src/main/deploy')
+            targets << "roborio"
+            directory = '/home/lvuser/deploy'
+        }
+    }
+}
+
+// Set this to true to enable desktop support.
+def includeDesktopSupport = false
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://frcmaven.wpi.edu/artifactory/release/"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    compile wpi.deps.wpilib()
+    nativeZip wpi.deps.wpilibJni(wpi.platforms.roborio)
+    nativeDesktopZip wpi.deps.wpilibJni(wpi.platforms.desktop)
+
+    compile wpi.deps.vendor.java()
+    nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
+    nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
+
+    compile 'edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java:2020.1.2'
+    compile 'edu.wpi.first.hal:hal-jni:2020.1.2'
+    compile 'com.google.dagger:dagger:2.25.4'
+
+    annotationProcessor "com.google.dagger:dagger-compiler:2.25.4"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+    testCompile 'org.hamcrest:hamcrest:2.2'
+    testCompile 'org.mockito:mockito-junit-jupiter:3.2.4'
+}
+
+// Fat.jar build with Gradle plugin
+jar {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
+}
