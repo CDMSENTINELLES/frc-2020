@@ -12,13 +12,13 @@ public class JoystickDrive extends CommandBase {
 
     public JoystickDrive(DriveSubsystem driveSubsystem) {
         this.driveSubsystem = driveSubsystem;
-        this.joystick =  new Joystick(JOYSTICK_PORT);
+        this.joystick = new Joystick(JOYSTICK_PORT);
         addRequirements(driveSubsystem);
     }
 
     @Override
     public void initialize() {
-        System.out.println("Init Joystick Drive.");
+        System.out.println("Init Joystick Drive Command.");
     }
 
     @Override
