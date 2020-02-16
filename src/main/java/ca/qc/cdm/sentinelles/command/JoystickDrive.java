@@ -1,6 +1,6 @@
-package ca.qc.cdm.sentinelles.commands;
+package ca.qc.cdm.sentinelles.command;
 
-import ca.qc.cdm.sentinelles.subsystems.drive.DriveSubsystem;
+import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -23,9 +23,18 @@ public class JoystickDrive extends CommandBase {
 
     @Override
     public void execute() {
-        double move = joystick.getX();
-        double rotate = joystick.getY();
+        double move = deadband(joystick.getX());
+        double rotate = deadband(joystick.getY());
+        double smooth = calibrateSlider(-1.0 * joystick.getRawAxis(3));
 
-        driveSubsystem.drive(move, rotate);
+        driveSubsystem.drive(move * smooth , rotate);
+    }
+
+    protected static double calibrateSlider(double value) {
+        return (value + 1) / (2);
+    }
+
+    private double deadband(double value) {
+        return Math.abs(value) < 0.10 ? 0 : value;
     }
 }

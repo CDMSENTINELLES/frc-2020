@@ -1,4 +1,4 @@
-package ca.qc.cdm.sentinelles.subsystems.drive;
+package ca.qc.cdm.sentinelles.subsystem.drive;
 
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;

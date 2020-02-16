@@ -1,4 +1,4 @@
-package ca.qc.cdm.sentinelles.subsystems.drive;
+package ca.qc.cdm.sentinelles.subsystem.drive;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;

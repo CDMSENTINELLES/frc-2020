@@ -1,14 +1,9 @@
 package ca.qc.cdm.sentinelles;
 
-import ca.qc.cdm.sentinelles.commands.NullCommand;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import ca.qc.cdm.sentinelles.command.NullCommand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
-import static ca.qc.cdm.sentinelles.Constants.DriveConstants.*;
 
 public class Robot extends TimedRobot {
     private RobotContainer robotContainer;

@@ -1,8 +1,8 @@
 package ca.qc.cdm.sentinelles;
 
-import ca.qc.cdm.sentinelles.commands.JoystickDrive;
-import ca.qc.cdm.sentinelles.commands.NullCommand;
-import ca.qc.cdm.sentinelles.subsystems.drive.DriveSubsystem;
+import ca.qc.cdm.sentinelles.command.JoystickDrive;
+import ca.qc.cdm.sentinelles.command.NullCommand;
+import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
