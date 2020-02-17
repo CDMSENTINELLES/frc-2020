@@ -23,11 +23,11 @@ public class JoystickDrive extends CommandBase {
 
     @Override
     public void execute() {
-        double move = deadband(joystick.getX());
-        double rotate = deadband(joystick.getY());
+        double move = deadband(joystick.getY());
+        double rotate = deadband(joystick.getX());
         double smooth = calibrateSlider(-1.0 * joystick.getRawAxis(3));
 
-        driveSubsystem.drive(move * smooth , rotate);
+        driveSubsystem.drive(move * smooth , rotate * smooth);
     }
 
     protected static double calibrateSlider(double value) {
