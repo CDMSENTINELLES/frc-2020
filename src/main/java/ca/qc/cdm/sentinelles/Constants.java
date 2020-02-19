@@ -6,11 +6,11 @@ public class Constants {
     }
 
     public static final class DriveConstants {
-        public static final int kTimeoutMs = 10;
+        public static final int TIMEOUT_MS = 30;
 
-        public static final int leftMaster = 1;
-        public static final int leftSlave = 2;
-        public static final int rightMaster = 3;
-        public static final int rightSlave = 4;
+        public static final int LEFT_MASTER = 1;
+        public static final int LEFT_SLAVE = 2;
+        public static final int RIGHT_MASTER = 3;
+        public static final int RIGHT_SLAVE = 4;
     }
 }

@@ -1,21 +1,30 @@
 package ca.qc.cdm.sentinelles;
 
-import ca.qc.cdm.sentinelles.commands.JoystickDrive;
-import ca.qc.cdm.sentinelles.commands.NullCommand;
-import ca.qc.cdm.sentinelles.subsystems.drive.DriveSubsystem;
+import ca.qc.cdm.sentinelles.command.JoystickDrive;
+import ca.qc.cdm.sentinelles.command.NullCommand;
+import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
-    // Init Subsystems
-    public final DriveSubsystem drivetrain = new DriveSubsystem();
+    // Subsystems
+    private DriveSubsystem driveTrain;
 
-    // Init Commands
+    // Commands
     private final Command autoCommand = new NullCommand();
 
-    public final JoystickDrive joystickDrive = new JoystickDrive(drivetrain);
-
     public RobotContainer() {
-        drivetrain.setDefaultCommand(joystickDrive);
+        initSubsystem();
+        buttonBindings();
+
+        driveTrain.setDefaultCommand(new JoystickDrive(driveTrain));
+    }
+
+    private void initSubsystem() {
+        driveTrain = new DriveSubsystem();
+    }
+
+    private void buttonBindings() {
+
     }
 
     public Command getAutonomousCommand() {

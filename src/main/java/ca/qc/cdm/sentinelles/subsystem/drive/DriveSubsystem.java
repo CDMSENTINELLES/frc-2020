@@ -1,4 +1,4 @@
-package ca.qc.cdm.sentinelles.subsystems.drive;
+package ca.qc.cdm.sentinelles.subsystem.drive;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static ca.qc.cdm.sentinelles.Constants.DriveConstants.*;
 
 public class DriveSubsystem extends SubsystemBase {
-    private final DriveGearbox leftDriveGearbox = new DriveGearbox(leftMaster, leftSlave, false, true);
-    private final DriveGearbox rightDriveGearbox = new DriveGearbox(rightMaster, rightSlave, false, true);
+    private final DriveGearbox leftDriveGearbox = new DriveGearbox(LEFT_MASTER, LEFT_SLAVE, false);
+    private final DriveGearbox rightDriveGearbox = new DriveGearbox(RIGHT_MASTER, RIGHT_SLAVE, false);
 
     public final DifferentialDrive drive = new DifferentialDrive(
             leftDriveGearbox.master(),
@@ -19,11 +19,9 @@ public class DriveSubsystem extends SubsystemBase {
      */
     public DriveSubsystem() {
         super();
-        init();
-    }
-
-    private void init() {
-        drive.setRightSideInverted(false);
+        drive.setSafetyEnabled(true);
+        drive.setExpiration(0.1);
+        drive.setMaxOutput(1.0);
     }
 
     public void drive(double move, double turn) {

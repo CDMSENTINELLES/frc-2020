@@ -1,4 +1,4 @@
-package ca.qc.cdm.sentinelles.commands;
+package ca.qc.cdm.sentinelles.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
