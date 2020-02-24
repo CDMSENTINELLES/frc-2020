@@ -7,7 +7,7 @@ import static ca.qc.cdm.sentinelles.Constants.DriveConstants.*;
 
 public class DriveSubsystem extends SubsystemBase {
     private final DriveGearbox leftDriveGearbox = new DriveGearbox(LEFT_MASTER, LEFT_SLAVE, false);
-    private final DriveGearbox rightDriveGearbox = new DriveGearbox(RIGHT_MASTER, RIGHT_SLAVE, false);
+    private final DriveGearbox rightDriveGearbox = new DriveGearbox(RIGHT_MASTER, RIGHT_SLAVE, true);
 
     public final DifferentialDrive drive = new DifferentialDrive(
             leftDriveGearbox.master(),
