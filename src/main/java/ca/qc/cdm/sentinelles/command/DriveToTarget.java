@@ -18,6 +18,7 @@ public class DriveToTarget extends CommandBase {
 
     @Override
     public void execute() {
+        System.out.println("Execute Drive to target Command");
         driveSubsystem.drive(-0.5, 0.0);
         Timer.delay(2.0);
         driveSubsystem.drive(0.0, 0.0);
