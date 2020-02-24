@@ -32,8 +32,8 @@ public class RobotContainer {
 
     private void buttonBindings() {
         new JoystickButton(xboxController, kA.value)
-                .whenPressed(new RunCommand(() -> System.out.println("Ka-pressed")))
-                .whenReleased(new RunCommand(() -> System.out.println("Ka-released")));
+                .whenPressed(new RunCommand(() -> System.out.println("Ka-PRESSED")))
+                .whenReleased(new RunCommand(() -> System.out.println("Ka-RELEASED")));
     }
 
     public Command getAutonomousCommand() {
