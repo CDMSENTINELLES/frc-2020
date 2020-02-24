@@ -1,5 +1,6 @@
 package ca.qc.cdm.sentinelles;
 
+import ca.qc.cdm.sentinelles.command.DriveToTarget;
 import ca.qc.cdm.sentinelles.command.JoystickDrive;
 import ca.qc.cdm.sentinelles.command.NullCommand;
 import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
@@ -33,7 +34,7 @@ public class RobotContainer {
 
     private void buttonBindings() {
         new JoystickButton(xboxController, kA.value)
-                .whenPressed(new RunCommand(() -> driveTrain.drive(0.5, 0)))
+                .whenPressed(new DriveToTarget(driveTrain))
                 .whenReleased(new RunCommand(() -> driveTrain.drive.stopMotor()));
 
     }
