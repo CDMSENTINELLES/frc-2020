@@ -3,7 +3,6 @@ package ca.qc.cdm.sentinelles.command;
 import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveToTarget extends CommandBase {
@@ -19,11 +18,6 @@ public class DriveToTarget extends CommandBase {
     @Override
     public void execute() {
         System.out.println("Execute Drive to target Command");
-        driveSubsystem.drive(-0.5, 0.0);
-    }
-
-    @Override
-    public boolean isFinished() {
-        return true;
+        driveSubsystem.continuousDrive();
     }
 }

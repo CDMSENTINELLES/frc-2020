@@ -36,7 +36,6 @@ public class RobotContainer {
         new JoystickButton(xboxController, kA.value)
                 .whenPressed(new DriveToTarget(driveTrain))
                 .whenReleased(new RunCommand(() -> driveTrain.drive.stopMotor()));
-
     }
 
     public Command getAutonomousCommand() {
