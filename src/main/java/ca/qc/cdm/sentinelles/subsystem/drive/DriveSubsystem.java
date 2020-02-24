@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static ca.qc.cdm.sentinelles.Constants.DriveConstants.*;
 
 public class DriveSubsystem extends SubsystemBase {
-    private final DriveGearbox leftDriveGearbox = new DriveGearbox(LEFT_MASTER, LEFT_SLAVE, false);
+    private final DriveGearbox leftDriveGearbox = new DriveGearbox(LEFT_MASTER, LEFT_SLAVE, true);
     private final DriveGearbox rightDriveGearbox = new DriveGearbox(RIGHT_MASTER, RIGHT_SLAVE, true);
 
     public final DifferentialDrive drive = new DifferentialDrive(
