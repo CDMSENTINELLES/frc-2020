@@ -31,8 +31,8 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void continuousDrive() {
         drive.setSafetyEnabled(true);
-        leftDriveGearbox.master().set(PercentOutput, 0.1);
-        rightDriveGearbox.master().set(MotionMagic, 0.3);
+        leftDriveGearbox.master().set(Velocity, 0.1);
+        rightDriveGearbox.master().set(Velocity, 0.1);
 //        rightDriveGearbox.master().set(PercentOutput, 0.1);
     }
 }
