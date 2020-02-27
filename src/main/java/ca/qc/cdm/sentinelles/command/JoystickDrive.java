@@ -1,18 +1,20 @@
 package ca.qc.cdm.sentinelles.command;
 
 import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import static ca.qc.cdm.sentinelles.Constants.JoystickConstants.JOYSTICK_PORT;
 
 public class JoystickDrive extends CommandBase {
     private final DriveSubsystem driveSubsystem;
-    private final Joystick joystick;
+    private final XboxController getXboxController;
 
     public JoystickDrive(DriveSubsystem driveSubsystem) {
         this.driveSubsystem = driveSubsystem;
-        this.joystick = new Joystick(JOYSTICK_PORT);
+        this.getXboxController = new XboxController(1);
         addRequirements(driveSubsystem);
     }
 
@@ -23,9 +25,9 @@ public class JoystickDrive extends CommandBase {
 
     @Override
     public void execute() {
-        double move = deadband(joystick.getY());
-        double rotate = deadband(joystick.getX() * -1);
-        double smooth = calibrateSlider(-1.0 * joystick.getRawAxis(3));
+        double move = deadband(getXboxController.getY(GenericHID.Hand.kLeft));
+        double rotate = deadband(getXboxController.getX(GenericHID.Hand.kLeft) * -1);
+        double smooth = calibrateSlider(-1.0 * getXboxController.getTriggerAxis(GenericHID.Hand.kRight));
 
         driveSubsystem.drive(move * smooth , rotate * smooth);
     }

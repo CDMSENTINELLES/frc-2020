@@ -6,11 +6,14 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class DriveToTarget extends CommandBase {
     private final DriveSubsystem driveSubsystem;
+    private final XboxController getXboxController;
+    private final XboxController xboxController;
     private AHRS navx;
     private JoystickButton buttonA;
     private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -20,6 +23,8 @@ public class DriveToTarget extends CommandBase {
     public DriveToTarget(DriveSubsystem driveSubsystem, JoystickButton buttonA) {
         this.driveSubsystem = driveSubsystem;
         this.buttonA = buttonA;
+        this.xboxController = new XboxController(1);
+        this.getXboxController = new XboxController(1);
         this.navx = new AHRS(SerialPort.Port.kUSB);
         addRequirements(driveSubsystem);
     }
@@ -29,6 +34,8 @@ public class DriveToTarget extends CommandBase {
         double tv = table.getEntry("tv").getDouble(0);
         double tx = table.getEntry("tx").getDouble(0);
         double ty = table.getEntry("ty").getDouble(0);
+
+        boolean active = true;
 
         double kSteer = -0.05,
                 kDrive = 0.2,
@@ -64,6 +71,7 @@ public class DriveToTarget extends CommandBase {
         else if (tv == 0) {
             System.out.println("No target, turning around in circles...");
             System.out.println("--RELEASE A TO DISABLE--");
+            driveSubsystem.drive(0, 0.4);
             return;
         }
 //        System.out.println("Execute Drive to target Command");
