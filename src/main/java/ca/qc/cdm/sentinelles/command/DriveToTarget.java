@@ -2,6 +2,9 @@ package ca.qc.cdm.sentinelles.command;
 
 import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -10,6 +13,9 @@ public class DriveToTarget extends CommandBase {
     private final DriveSubsystem driveSubsystem;
     private AHRS navx;
     private JoystickButton buttonA;
+    private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    private NetworkTableEntry ledMode = table.getEntry("ledMode");
+    private NetworkTableEntry pipeline = table.getEntry("sentinelles_test");
 
     public DriveToTarget(DriveSubsystem driveSubsystem, JoystickButton buttonA) {
         this.driveSubsystem = driveSubsystem;
@@ -20,7 +26,47 @@ public class DriveToTarget extends CommandBase {
 
     @Override
     public void execute() {
-        System.out.println("Execute Drive to target Command");
-        driveSubsystem.drive(-1 * 0.5, 0);
+        double tv = table.getEntry("tv").getDouble(0);
+        double tx = table.getEntry("tx").getDouble(0);
+        double ty = table.getEntry("ty").getDouble(0);
+
+        double kSteer = -0.05,
+                kDrive = 0.2,
+                steerCommand = 0.0,
+                driveCommand = 0.0,
+                headingError = -tx,
+                distanceError = -ty,
+                minCommand = 0.0,
+                txDeadband = 1.0;
+
+        if (tx > txDeadband) {
+            steerCommand = kSteer * headingError -minCommand;
+            return;
+        } else if (tx < txDeadband) {
+            steerCommand = kSteer * headingError + minCommand;
+            return;
+        }
+
+        driveCommand = kDrive * distanceError;
+
+        if (tv == 1) {
+            if (headingError <= 2.0 && distanceError <= 1.0) {
+                System.out.println("At target");
+                return;
+            }
+            else {
+                System.out.println("tx: " + tx);
+                System.out.println("ty: " + ty);
+                System.out.println("aligning to target");
+                driveSubsystem.drive(driveCommand, steerCommand);
+            }
+        }
+        else if (tv == 0) {
+            System.out.println("No target, turning around in circles...");
+            System.out.println("--RELEASE A TO DISABLE--");
+            return;
+        }
+//        System.out.println("Execute Drive to target Command");
+//        driveSubsystem.drive(-1 * 0.5, 0);
     }
 }
