@@ -1,5 +1,7 @@
 package ca.qc.cdm.sentinelles.subsystem.drive;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -51,6 +53,10 @@ public class DriveGearbox {
 
         motors.forEach(motor -> {
             motor.configFactoryDefault();
+
+            motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
+
+            motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, TIMEOUT_MS);
 
             motor.setSensorPhase(true);
             motor.config_kP(SLOT_ID, 0.1, TIMEOUT_MS);
