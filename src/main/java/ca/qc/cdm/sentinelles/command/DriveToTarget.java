@@ -16,14 +16,12 @@ public class DriveToTarget extends CommandBase {
     private final DriveSubsystem driveSubsystem;
     private final XboxController xboxController;
     private AHRS navx;
-    private JoystickButton buttonA;
     private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     private NetworkTableEntry ledMode = table.getEntry("ledMode");
     private NetworkTableEntry pipeline = table.getEntry("sentinelles_test");
 
-    public DriveToTarget(DriveSubsystem driveSubsystem, JoystickButton buttonA) {
+    public DriveToTarget(DriveSubsystem driveSubsystem) {
         this.driveSubsystem = driveSubsystem;
-        this.buttonA = buttonA;
         this.xboxController = new XboxController(XBOX_PORT);
         this.navx = new AHRS(kUSB);
         addRequirements(driveSubsystem);
