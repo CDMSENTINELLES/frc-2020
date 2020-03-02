@@ -5,16 +5,15 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+import static ca.qc.cdm.sentinelles.Constants.JoystickConstants.XBOX_PORT;
 import static edu.wpi.first.wpilibj.SerialPort.Port.kUSB;
 
 public class DriveToTarget extends CommandBase {
     private final DriveSubsystem driveSubsystem;
-    private final XboxController getXboxController;
     private final XboxController xboxController;
     private AHRS navx;
     private JoystickButton buttonA;
@@ -25,10 +24,14 @@ public class DriveToTarget extends CommandBase {
     public DriveToTarget(DriveSubsystem driveSubsystem, JoystickButton buttonA) {
         this.driveSubsystem = driveSubsystem;
         this.buttonA = buttonA;
-        this.xboxController = new XboxController(1);
-        this.getXboxController = new XboxController(1);
+        this.xboxController = new XboxController(XBOX_PORT);
         this.navx = new AHRS(kUSB);
         addRequirements(driveSubsystem);
+    }
+
+    @Override
+    public void initialize() {
+        ledMode.setNumber(3);
     }
 
     @Override
@@ -80,10 +83,12 @@ public class DriveToTarget extends CommandBase {
 
 //        driveSubsystem.drive(driveCommand, steerCommand);
 
-
 //        System.out.println("Execute Drive to target Command");
 //        driveSubsystem.drive(-1 * 0.5, 0);
+    }
 
-
+    @Override
+    public void end(boolean interrupted) {
+        ledMode.setNumber(1);
     }
 }

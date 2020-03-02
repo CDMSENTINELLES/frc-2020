@@ -2,7 +2,6 @@ package ca.qc.cdm.sentinelles;
 
 public class Constants {
     public static final class JoystickConstants {
-        public static final int JOYSTICK_PORT = 0;
         public static final int XBOX_PORT = 1;
     }
 
