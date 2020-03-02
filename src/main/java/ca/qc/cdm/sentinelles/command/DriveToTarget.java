@@ -30,59 +30,60 @@ public class DriveToTarget extends CommandBase {
     @Override
     public void initialize() {
         ledMode.setNumber(3);
+        pipeline.setNumber(0);
     }
 
     @Override
     public void execute() {
-//        double tv = table.getEntry("tv").getDouble(0);
-//        double tx = table.getEntry("tx").getDouble(0);
-//        double ty = table.getEntry("ty").getDouble(0);
-//
-//        boolean active = true;
-//
-//        double kSteer = -0.05,
-//                kDrive = 0.2,
-//                steerCommand = 0.0,
-//                driveCommand = 0.0,
-//                headingError = -tx,
-//                distanceError = -ty,
-//                minCommand = 0.0,
-//                txDeadband = 1.0;
-//
-//        System.out.println("tv " + tv);
-//
-//        if (tv == 1) {
-//            if (tx > txDeadband) {
-//                steerCommand = kSteer * headingError -minCommand;
-//                return;
-//            } else if (tx < txDeadband) {
-//                steerCommand = kSteer * headingError + minCommand;
-//                return;
-//            }
-//
-//            driveCommand = kDrive * distanceError;
-//            if (headingError <= 2.0 && distanceError <= 1.0) {
-//                System.out.println("At target");
-//            }
-//            else {
-//                System.out.println("tx: " + tx);
-//                System.out.println("ty: " + ty);
-//                System.out.println("aligning to target");
-//                return;
-//            }
-//        }
-//        else {
-//            System.out.println("No target, turning around in circles...");
-//            System.out.println("--RELEASE A TO DISABLE--");
-//            driveCommand = 0;
-//            steerCommand = 0.4;
-//            return;
-//        }
+        double tv = table.getEntry("tv").getDouble(0);
+        double tx = table.getEntry("tx").getDouble(0);
+        double ty = table.getEntry("ty").getDouble(0);
 
+        boolean active = true;
+
+        double kSteer = -0.05,
+                kDrive = 0.2,
+                steerCommand = 0.0,
+                driveCommand = 0.0,
+                headingError = -tx,
+                distanceError = -ty,
+                minCommand = 0.0,
+                txDeadband = 1.0;
+
+        System.out.println("tv " + tv);
+
+        if (tv == 1) {
+            if (tx > txDeadband) {
+                steerCommand = kSteer * headingError -minCommand;
+                return;
+            } else if (tx < txDeadband) {
+                steerCommand = kSteer * headingError + minCommand;
+                return;
+            }
+
+            driveCommand = kDrive * distanceError;
+            if (headingError <= 2.0 && distanceError <= 1.0) {
+                System.out.println("At target");
+            }
+            else {
+                System.out.println("tx: " + tx);
+                System.out.println("ty: " + ty);
+                System.out.println("aligning to target");
+                return;
+            }
+        }
+        else {
+            System.out.println("No target, turning around in circles...");
+            System.out.println("--RELEASE A TO DISABLE--");
+            driveCommand = 0;
+            steerCommand = 0.4;
+            return;
+        }
+//
 //        driveSubsystem.drive(driveCommand, steerCommand);
-
-//        System.out.println("Execute Drive to target Command");
-//        driveSubsystem.drive(-1 * 0.5, 0);
+//
+        System.out.println("Execute Drive to target Command");
+        driveSubsystem.drive(-1 * 0.5, 0);
     }
 
     @Override

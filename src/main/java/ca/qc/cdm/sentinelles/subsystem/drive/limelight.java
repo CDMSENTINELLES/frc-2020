@@ -1,4 +1,5 @@
 package ca.qc.cdm.sentinelles.subsystem.drive;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -16,7 +17,6 @@ public class limelight extends SubsystemBase {
     NetworkTableEntry ta;
 
     NetworkTableEntry pipelineIndex;
-
 
 
     public limelight() {
@@ -41,7 +41,7 @@ public class limelight extends SubsystemBase {
 
     }
 
-    public void setPipelineIndex(double index){
+    public void setPipelineIndex(double index) {
         pipelineIndex.setDouble(index);
     }
 
@@ -51,7 +51,6 @@ public class limelight extends SubsystemBase {
 
     public double getTrackingX() {
         return tx.getDouble(0.0);
-
     }
 
     public double getTrackingY() {
