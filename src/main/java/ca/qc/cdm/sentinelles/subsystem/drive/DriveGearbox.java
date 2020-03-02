@@ -8,7 +8,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import java.util.List;
 
 import static ca.qc.cdm.sentinelles.Constants.DriveConstants.TIMEOUT_MS;
+import static com.ctre.phoenix.motorcontrol.FeedbackDevice.IntegratedSensor;
 import static com.ctre.phoenix.motorcontrol.NeutralMode.Brake;
+import static com.ctre.phoenix.motorcontrol.StatusFrameEnhanced.Status_2_Feedback0;
 
 public class DriveGearbox {
     private static final int SLOT_ID = 0;
@@ -54,9 +56,8 @@ public class DriveGearbox {
         motors.forEach(motor -> {
             motor.configFactoryDefault();
 
-            motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
-
-            motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, TIMEOUT_MS);
+            motor.configSelectedFeedbackSensor(IntegratedSensor);
+            motor.setStatusFramePeriod(Status_2_Feedback0, TIMEOUT_MS);
 
             motor.setSensorPhase(true);
             motor.config_kP(SLOT_ID, 0.1, TIMEOUT_MS);

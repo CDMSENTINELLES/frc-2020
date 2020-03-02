@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+import static edu.wpi.first.wpilibj.SerialPort.Port.kUSB;
+
 public class DriveToTarget extends CommandBase {
     private final DriveSubsystem driveSubsystem;
     private final XboxController getXboxController;
@@ -25,7 +27,7 @@ public class DriveToTarget extends CommandBase {
         this.buttonA = buttonA;
         this.xboxController = new XboxController(1);
         this.getXboxController = new XboxController(1);
-        this.navx = new AHRS(SerialPort.Port.kUSB);
+        this.navx = new AHRS(kUSB);
         addRequirements(driveSubsystem);
     }
 

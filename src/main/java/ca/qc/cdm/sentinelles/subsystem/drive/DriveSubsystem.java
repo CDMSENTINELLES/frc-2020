@@ -29,7 +29,7 @@ public class DriveSubsystem extends SubsystemBase {
     private int leftSenPos = leftDriveGearbox.master().getSelectedSensorPosition(0);
     private int rightSenPos = rightDriveGearbox.master().getSelectedSensorPosition(0);
 
-    private double distanceLeft = leftSenPos
+//    private double distanceLeft = leftSenPos
 
     public final DifferentialDrive drive = new DifferentialDrive(
             leftDriveGearbox.master(),
