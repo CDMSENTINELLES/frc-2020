@@ -8,21 +8,26 @@ import java.util.List;
 
 public class launchGearbox {
     private final CANSparkMax master;
-    private final CANSparkMax slave;
     private final boolean inverted;
     private final List<CANSparkMax> motors;
 
-    public launchGearbox(int masterId, int slaveId, boolean inverted) {
+    public launchGearbox(int masterId, boolean inverted) {
         master = new CANSparkMax(masterId, CANSparkMaxLowLevel.MotorType.kBrushless);
-        slave = new CANSparkMax(slaveId, CANSparkMaxLowLevel.MotorType.kBrushless);
         this.inverted = inverted;
-        motors = List.of(master, slave);
+        motors = List.of(master);
         init();
     }
     private void init() {
         master.setInverted(inverted);
-        slave.setInverted(inverted);
-        slave.follow(master);
+
+        motors.forEach(motor ->{
+            motor.restoreFactoryDefaults();
+            motor.enableVoltageCompensation(11);
+            motor.enableSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, true);
+            motor.setSmartCurrentLimit(20, 15, 3500);
+            motor.setOpenLoopRampRate(1);
+            motor.setSoftLimit(CANSparkMax.SoftLimitDirection.kReverse, 1);
+        });
 
     }
 }
