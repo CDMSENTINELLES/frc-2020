@@ -18,10 +18,6 @@ public class DriveToTarget extends CommandBase {
     final double MAX_DRIVE_POSITIVE = 0.7;
     final double MAX_DRIVE_NEGATIVE = -0.7;
 
-    private boolean m_LimelightHasValidTarget = false;
-    private double m_LimelightDriveCommand = 0.0;
-    private double m_LimelightSteerCommand = 0.0;
-
     public DriveToTarget(DriveSubsystem driveSubsystem) {
         this.driveSubsystem = driveSubsystem;
         addRequirements(driveSubsystem);
@@ -35,26 +31,24 @@ public class DriveToTarget extends CommandBase {
 
     @Override
     public void execute() {
+        System.out.println("TEST");
         double tv = table.getEntry("tv").getDouble(0);
         double tx = table.getEntry("tx").getDouble(0);
         double ty = table.getEntry("ty").getDouble(0);
         double ta = table.getEntry("ta").getDouble(0);
 
-        if (tv < 1.0) {
-            m_LimelightHasValidTarget = false;
-            m_LimelightDriveCommand = 0.0;
-            m_LimelightSteerCommand = 0.0;
-            return;
-        }
-
-        m_LimelightHasValidTarget = true;
+        double m_LimelightDriveCommand = 0.0;
+        double m_LimelightSteerCommand = 0.7;
+        boolean m_LimelightHasValidTarget = tv == 1.0;
 
         // Start with proportional steering
         double steer_cmd = tx * STEER_K;
         m_LimelightSteerCommand = steer_cmd;
 
         // try to drive forward until the target area reaches our desired area
+        System.out.println("tv: " + tv + ", tx: " + tx +  ", ta:" + ta);
         double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
+        System.out.println("Drive command: " + drive_cmd);
 
         // don't let the robot drive too fast into the goal
         if (drive_cmd > MAX_DRIVE_POSITIVE) {
@@ -66,8 +60,10 @@ public class DriveToTarget extends CommandBase {
         m_LimelightDriveCommand = drive_cmd;
 
         if (m_LimelightHasValidTarget) {
+            System.out.println("GO");
             driveSubsystem.drive(m_LimelightDriveCommand, m_LimelightSteerCommand);
         } else {
+            System.out.println("STOP");
             driveSubsystem.drive(0.0, 0.0);
         }
 //
