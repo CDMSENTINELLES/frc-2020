@@ -6,6 +6,8 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+import java.util.*;
+
 public class DriveToTarget extends CommandBase {
     private final DriveSubsystem driveSubsystem;
     private final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -41,9 +43,7 @@ public class DriveToTarget extends CommandBase {
         double m_LimelightSteerCommand = 0.7;
         boolean m_LimelightHasValidTarget = tv == 1.0;
 
-        // Start with proportional steering
-        double steer_cmd = tx * STEER_K;
-        m_LimelightSteerCommand = steer_cmd;
+
 
         // try to drive forward until the target area reaches our desired area
         System.out.println("tv: " + tv + ", tx: " + tx +  ", ta:" + ta);
@@ -58,6 +58,42 @@ public class DriveToTarget extends CommandBase {
             drive_cmd = MAX_DRIVE_NEGATIVE;
         }
         m_LimelightDriveCommand = drive_cmd;
+
+
+        int i = 0;
+        Queue<Double> eliminateZero = new LinkedList<>();
+        do {
+            i++;
+            eliminateZero.add(tx);
+            if (eliminateZero.size() > 4){
+                eliminateZero.remove();
+            }
+        } while (i < 3);
+        i = 0;
+        Object[] arrayZero = eliminateZero.toArray();
+        Integer[] intArrayZero = Arrays.copyOf(arrayZero, arrayZero.length, Integer[].class);
+        if (eliminateZero.contains(0)){
+            Set set = new HashSet(Arrays.asList(arrayZero));
+            if (set.size() != arrayZero.length) {
+                for(int z = 0; z < arrayZero.length; z++){
+                    if (intArrayZero[i] == 0){
+                        for(int j = i; j < arrayZero.length -1; j++){
+                            intArrayZero[j] = intArrayZero[j+1];
+                            Arrays.copyOf(intArrayZero, intArrayZero.length - 1);
+                        }
+                    }
+                }
+            }
+        }
+        int sum = 0;
+        int average = 0;
+        for (int y = 0; y < intArrayZero.length; y++) {
+            sum += intArrayZero[y];
+        }
+        average = sum / intArrayZero.length;
+
+        double steer_cmd = average * STEER_K;
+        m_LimelightSteerCommand = steer_cmd;
 
         if (m_LimelightHasValidTarget) {
             System.out.println("GO");
