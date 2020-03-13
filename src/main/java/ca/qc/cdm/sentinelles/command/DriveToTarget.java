@@ -40,7 +40,7 @@ public class DriveToTarget extends CommandBase {
         double ta = table.getEntry("ta").getDouble(0);
 
         double m_LimelightDriveCommand = 0.0;
-        double m_LimelightSteerCommand = 0.7;
+        double m_LimelightSteerCommand = 0.4;
         boolean m_LimelightHasValidTarget = tv == 1.0;
 
 
