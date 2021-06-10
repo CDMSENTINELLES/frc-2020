@@ -2,14 +2,21 @@ package ca.qc.cdm.sentinelles.subsystem.arm;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.pheonix.motorcontrol.ControlMode;
-import com.ctre.pheonix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
-import static ca.qc.cdm.sentinelles.Constants.ArmConstants;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import static ca.qc.cdm.sentinelles.Constants.ArmConstants.BASE_ARM;
+
+import java.util.Map;
 
 public class ArmSubsystem extends SubsystemBase {
     private ShuffleboardTab tab = Shuffleboard.getTab("Arm");
-    private NetworkTableEntry maxSpeed = 
+    public NetworkTableEntry maxSpeed = 
             tab.add("Max Speed Arm Base", 1)
                 .withWidget(BuiltInWidgets.kNumberSlider)
                 .withProperties(Map.of("min", 0, "max", 1))
@@ -17,11 +24,13 @@ public class ArmSubsystem extends SubsystemBase {
 
     VictorSPX armBase = new VictorSPX(BASE_ARM);
 
-    public void lowerArmUp (){
-        armBase.set(ControlMode.PercentOutput, maxSpeed);
+    public void lowerArmUp () {
+        double max = maxSpeed.getDouble(1.0);
+        armBase.set(ControlMode.PercentOutput, max);
     }
 
     public void lowerArmDown () {
-        armBase.set(ControlMode.PercentOutput, -maxSpeed);
+        double max = maxSpeed.getDouble(-1.0);
+        armBase.set(ControlMode.PercentOutput, max);
     }
 }

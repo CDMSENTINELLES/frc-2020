@@ -2,10 +2,19 @@ package ca.qc.cdm.sentinelles.subsystem.claw;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.pheonix.motorcontrol.ControlMode;
-import com.ctre.pheonix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import static ca.qc.cdm.sentinelles.Constants.ArmConstants;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+
+import static ca.qc.cdm.sentinelles.Constants.ArmConstants.CLAW_MASTER;
+import static ca.qc.cdm.sentinelles.Constants.ArmConstants.CLAW_SLAVE;
+
+import java.util.Map;
 
 public class ClawSubsystem extends SubsystemBase {
 
@@ -26,10 +35,12 @@ public class ClawSubsystem extends SubsystemBase {
     }
 
     public void clawOpen () {
-        clawMaster.set(ControlMode.PercentOutput, maxSpeed);
+        double max = maxSpeed.getDouble(1.0);
+        clawMaster.set(ControlMode.PercentOutput, max);
     }
 
     public void clawClose () {
-        clawMaster.set(ControlMode.PercentOutput, -maxSpeed);
+        double max = maxSpeed.getDouble(-1.0);
+        clawMaster.set(ControlMode.PercentOutput, max);
     }
 }

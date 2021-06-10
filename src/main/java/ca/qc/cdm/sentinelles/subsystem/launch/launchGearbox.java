@@ -9,7 +9,7 @@ import static ca.qc.cdm.sentinelles.Constants.ArmConstants;
 import java.util.List;
 
 public class launchGearbox {
-    private final CANSparkMax master;
+    public final CANSparkMax master;
     private final boolean inverted;
     private final List<CANSparkMax> motors;
 

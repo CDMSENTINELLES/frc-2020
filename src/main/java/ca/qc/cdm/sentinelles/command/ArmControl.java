@@ -3,7 +3,7 @@ package ca.qc.cdm.sentinelles.command;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import static ca.qc.cdm.sentinelles.Constants.JoystickConstants.JOYSTICK_PORT;
+import static ca.qc.cdm.sentinelles.Constants.JoystickConstants.JOYSTICK_SUB_PORT;
 
 import ca.qc.cdm.sentinelles.subsystem.arm.ArmSubsystem;
 import ca.qc.cdm.sentinelles.subsystem.claw.ClawSubsystem;

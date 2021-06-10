@@ -1,11 +1,16 @@
 package ca.qc.cdm.sentinelles.subsystem.launch;
 
-import static ca.qc.cdm.sentinelles.Constants.ArmConstants;
+
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import static ca.qc.cdm.sentinelles.Constants.ArmConstants.MIDDLE_ARM;
 
+import java.util.Map;
 
 
 public class LaunchSubsystem extends SubsystemBase {
@@ -17,14 +22,16 @@ public class LaunchSubsystem extends SubsystemBase {
                 .getEntry();
 
     
-    private final LaunchGearbox middleArmGearbox = new launchGearbox(MIDDLE_ARM, true);
+    private final launchGearbox middleArmGearbox = new launchGearbox(MIDDLE_ARM, true);
 
 
     public void middleArmUp () {
-        middleArmGearbox.master.set(maxSpeed);
+        double max = maxSpeed.getDouble(1.0);
+        middleArmGearbox.master.set(max);
     }
 
     public void middleArmDown () {
-        middleArmGearbox.master.set(-maxSpeed);
+        double max = maxSpeed.getDouble(-1.0);
+        middleArmGearbox.master.set(max);
     }
 }
