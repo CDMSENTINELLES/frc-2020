@@ -1,14 +1,30 @@
 package ca.qc.cdm.sentinelles.subsystem.launch;
 
+import static ca.qc.cdm.sentinelles.Constants.ArmConstants;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class LaunchSubsystem extends SubsystemBase {
-    public final launchGearbox mainGearbox = new launchGearbox(9, true);
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-    public void launchBallRPM (double RPM, double RPMperS, int slotID) {
-        mainGearbox.master.setSmartMotionMaxAccel();
+
+
+public class LaunchSubsystem extends SubsystemBase {
+    private ShuffleboardTab tab = Shuffleboard.getTab("Arm");
+    private NetworkTableEntry maxSpeed = 
+            tab.add("Max Speed Arm Middle", 1)
+                .withWidget(BuiltInWidgets.kNumberSlider)
+                .withProperties(Map.of("min", 0, "max", 1))
+                .getEntry();
+
+    
+    private final LaunchGearbox middleArmGearbox = new launchGearbox(MIDDLE_ARM, true);
+
+
+    public void middleArmUp () {
+        middleArmGearbox.master.set(maxSpeed);
     }
-    public void launchBall (int RPM, int kF, int kP, int kI, int kD, int kIzone, boolean selection) {
-        if selection
+
+    public void middleArmDown () {
+        middleArmGearbox.master.set(-maxSpeed);
     }
 }

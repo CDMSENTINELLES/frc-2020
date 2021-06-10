@@ -4,6 +4,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.CAN;
 
+import static ca.qc.cdm.sentinelles.Constants.ArmConstants;
+
 import java.util.List;
 
 public class launchGearbox {
