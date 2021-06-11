@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
@@ -30,8 +29,8 @@ public class MidArmSubsystem extends SubsystemBase {
     }
 
     public void midArmDown () {
-        double max = maxSpeed.getDouble(-0.05);
-        armMid.set(max);
+        double max = maxSpeed.getDouble(0.05);
+        armMid.set(-max);
     }
 
     public void midArmStop () {

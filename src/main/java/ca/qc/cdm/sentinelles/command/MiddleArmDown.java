@@ -1,9 +1,5 @@
 package ca.qc.cdm.sentinelles.command;
 
-
-import com.revrobotics.jni.CANSparkMaxJNI;
-
-import ca.qc.cdm.sentinelles.Constants.ArmConstants;
 import ca.qc.cdm.sentinelles.subsystem.midarm.MidArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 

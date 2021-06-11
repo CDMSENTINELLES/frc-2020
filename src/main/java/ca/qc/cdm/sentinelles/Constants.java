@@ -2,8 +2,8 @@ package ca.qc.cdm.sentinelles;
 
 public class Constants {
     public static final class JoystickConstants {
-        public static final int JOYSTICK_PORT = 0;
-        public static final int JOYSTICK_SUB_PORT = 1;
+        public static final int JOYSTICK_PORT = 1;
+        public static final int JOYSTICK_SUB_PORT = 0;
     }
 
     public static final class DriveConstants {

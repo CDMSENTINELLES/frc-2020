@@ -13,7 +13,6 @@ import ca.qc.cdm.sentinelles.command.NullCommand;
 import ca.qc.cdm.sentinelles.subsystem.arm.ArmSubsystem;
 import ca.qc.cdm.sentinelles.subsystem.claw.ClawSubsystem;
 import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
-import ca.qc.cdm.sentinelles.subsystem.launch.LaunchSubsystem;
 import ca.qc.cdm.sentinelles.subsystem.midarm.MidArmSubsystem;
 import ca.qc.cdm.sentinelles.Constants.JoystickConstants;
 import edu.wpi.first.wpilibj.Joystick;
@@ -32,8 +31,6 @@ public class RobotContainer {
     private DriveSubsystem driveTrain = new DriveSubsystem();
 
     private ClawSubsystem clawSubsystem = new ClawSubsystem();
-
-    private LaunchSubsystem launchSubsystem;
     
     private final ArmSubsystem armSubsystem = new ArmSubsystem();
 
@@ -59,7 +56,7 @@ public class RobotContainer {
         buttonBindings();
         driveTrain.setDefaultCommand(joystickDrive);
         //initSubsystem();
-        /*clawOpen.setName("Open Claw");
+        clawOpen.setName("Open Claw");
         clawClose.setName("Close Claw");
 
         middleArmDown.setName("Middle Arm (NEO) down");
@@ -86,9 +83,7 @@ public class RobotContainer {
                 command -> 
                     Shuffleboard.addEventMarker(
                         "Command complete", command.getName(), EventImportance.kNormal));
-*/
         
-        //launchSubsystem.setDefaultCommand(new ArmControl(launchSubsystem, armSubsystem, clawSubsystem));
        
     }
 
@@ -105,14 +100,14 @@ public class RobotContainer {
         new JoystickButton(joystickSub, 8).whenHeld(clawClose);
 
         new JoystickButton(joystickSub, 9).whenHeld(new MiddleArmDown(midArmSubsystem));
-        new JoystickButton(joystickSub, 9).whenInactive(new MiddleArmStop(midArmSubsystem));
+        new JoystickButton(joystickSub, 9).whenReleased(new MiddleArmStop(midArmSubsystem));
         new JoystickButton(joystickSub, 10).whenHeld(new MiddleArmUp(midArmSubsystem));
-        new JoystickButton(joystickSub, 10).whenInactive(new MiddleArmStop(midArmSubsystem));
+        new JoystickButton(joystickSub, 10).whenReleased(new MiddleArmStop(midArmSubsystem));
 
         new JoystickButton(joystickSub, 11).whenHeld(new LowerArmDown(armSubsystem));
-        new JoystickButton(joystickSub, 11).whenInactive(new LowerArmStop(armSubsystem));
+        new JoystickButton(joystickSub, 11).whenReleased(new LowerArmStop(armSubsystem));
         new JoystickButton(joystickSub, 12).whenHeld(new LowerArmUp(armSubsystem));
-        new JoystickButton(joystickSub, 12).whenInactive(new LowerArmStop(armSubsystem));
+        new JoystickButton(joystickSub, 12).whenReleased(new LowerArmStop(armSubsystem));
 
     }
 

@@ -1,6 +1,5 @@
 package ca.qc.cdm.sentinelles.command;
 
-
 import ca.qc.cdm.sentinelles.subsystem.midarm.MidArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -14,7 +13,7 @@ public class MiddleArmStop extends CommandBase {
 
     @Override
     public void initialize() {
-        
+        //stupid little shit code work
     }
     
     @Override
