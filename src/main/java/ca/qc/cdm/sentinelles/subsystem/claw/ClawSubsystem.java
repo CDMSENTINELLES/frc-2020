@@ -42,4 +42,8 @@ public class ClawSubsystem extends SubsystemBase {
         double max = maxSpeed.getDouble(0.05);
         clawMaster.set(ControlMode.PercentOutput, max);
     }
+
+    public void clawStop () {
+        clawMaster.set(ControlMode.PercentOutput, 0);
+    }
 }

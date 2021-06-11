@@ -33,4 +33,8 @@ public class MidArmSubsystem extends SubsystemBase {
         double max = maxSpeed.getDouble(-0.05);
         armMid.set(max);
     }
+
+    public void midArmStop () {
+        armMid.set(0);
+    }
 }

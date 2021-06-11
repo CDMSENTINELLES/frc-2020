@@ -35,4 +35,8 @@ public class ArmSubsystem extends SubsystemBase {
         double max = maxSpeed.getDouble(0.05);
         armBase.set(ControlMode.PercentOutput, max);
     }
+
+    public void lowerArmStop () {
+        armBase.set(ControlMode.PercentOutput, 0);
+    }
 }
