@@ -23,7 +23,7 @@ public class MidArmSubsystem extends SubsystemBase {
                 .withProperties(Map.of("min", 0, "max", 1))
                 .getEntry();
 
-    CANSparkMax armMid = new CANSparkMax(ArmConstants.MIDDLE_ARM, CANSparkMaxLowLevel.MotorType.kBrushless);
+    private final CANSparkMax armMid = new CANSparkMax(ArmConstants.MIDDLE_ARM, CANSparkMaxLowLevel.MotorType.kBrushless);
     public void midArmUp () {
         double max = maxSpeed.getDouble(0.05);
         armMid.set(max);

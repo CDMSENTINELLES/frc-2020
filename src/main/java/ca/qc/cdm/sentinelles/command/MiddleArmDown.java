@@ -1,24 +1,28 @@
 package ca.qc.cdm.sentinelles.command;
 
+
+import com.revrobotics.jni.CANSparkMaxJNI;
+
+import ca.qc.cdm.sentinelles.Constants.ArmConstants;
 import ca.qc.cdm.sentinelles.subsystem.midarm.MidArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class MiddleArmDown extends CommandBase {
-    private final MidArmSubsystem midArmSubsystem;
+    private final MidArmSubsystem m_midArmSubsystem;
 
     public MiddleArmDown(MidArmSubsystem midArmSubsystem) {
-        this.midArmSubsystem = midArmSubsystem;
-        addRequirements(midArmSubsystem);
+        m_midArmSubsystem = midArmSubsystem;
+        addRequirements(m_midArmSubsystem);
     }
 
     @Override
     public void initialize() {
-
+        
     }
     
     @Override
     public void execute() {
-        midArmSubsystem.midArmDown();
+        m_midArmSubsystem.midArmDown();
     }
 
     @Override

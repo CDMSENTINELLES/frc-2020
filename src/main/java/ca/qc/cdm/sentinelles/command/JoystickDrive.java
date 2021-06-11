@@ -4,7 +4,8 @@ import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import static ca.qc.cdm.sentinelles.Constants.JoystickConstants.JOYSTICK_PORT;
+
+import ca.qc.cdm.sentinelles.Constants.JoystickConstants;
 
 public class JoystickDrive extends CommandBase {
     private final DriveSubsystem driveSubsystem;
@@ -12,7 +13,7 @@ public class JoystickDrive extends CommandBase {
 
     public JoystickDrive(DriveSubsystem driveSubsystem) {
         this.driveSubsystem = driveSubsystem;
-        this.joystick = new Joystick(JOYSTICK_PORT);
+        this.joystick = new Joystick(JoystickConstants.JOYSTICK_PORT);
         addRequirements(driveSubsystem);
     }
 

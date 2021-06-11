@@ -4,6 +4,9 @@ import ca.qc.cdm.sentinelles.command.NullCommand;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
+import ca.qc.cdm.sentinelles.Constants.ArmConstants;
 
 public class Robot extends TimedRobot {
     private RobotContainer robotContainer;
@@ -17,6 +20,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         robotContainer = new RobotContainer();
         autonomousCommand = new NullCommand();
+        //final CANSparkMax armMid = new CANSparkMax(ArmConstants.MIDDLE_ARM, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
     /**
@@ -41,9 +45,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         autonomousCommand = robotContainer.getAutonomousCommand();
-        if (autonomousCommand != null) {
-            autonomousCommand.schedule();
-        }
+        autonomousCommand.schedule();
     }
 
     @Override
@@ -52,15 +54,14 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) {
-            autonomousCommand.cancel();
-        }
+        autonomousCommand.cancel();
     }
 
-    @Override
+    /*@Override
     public void teleopPeriodic() {
+        
 
-    }
+    }*/
 
     @Override
     public void testInit() {

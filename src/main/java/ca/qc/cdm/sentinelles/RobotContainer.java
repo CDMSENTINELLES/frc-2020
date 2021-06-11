@@ -27,15 +27,17 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
 
     // Subsystems
-    private DriveSubsystem driveTrain;
+    private DriveSubsystem driveTrain = new DriveSubsystem();
 
-    private ClawSubsystem clawSubsystem;
+    private ClawSubsystem clawSubsystem = new ClawSubsystem();
 
     private LaunchSubsystem launchSubsystem;
     
-    private ArmSubsystem armSubsystem;
+    private final ArmSubsystem armSubsystem = new ArmSubsystem();
 
-    private MidArmSubsystem midArmSubsystem;
+    private final MidArmSubsystem midArmSubsystem = new MidArmSubsystem();
+
+    private final CommandBase joystickDrive = new JoystickDrive(driveTrain);
 
     private final Joystick joystickSub = new Joystick(JoystickConstants.JOYSTICK_SUB_PORT);
 
@@ -52,8 +54,10 @@ public class RobotContainer {
     private final Command autoCommand = new NullCommand();
 
     public RobotContainer() {
+        buttonBindings();
+        //driveTrain.setDefaultCommand(joystickDrive);
         //initSubsystem();
-        clawOpen.setName("Open Claw");
+        /*clawOpen.setName("Open Claw");
         clawClose.setName("Close Claw");
 
         middleArmDown.setName("Middle Arm (NEO) down");
@@ -80,17 +84,16 @@ public class RobotContainer {
                 command -> 
                     Shuffleboard.addEventMarker(
                         "Command complete", command.getName(), EventImportance.kNormal));
-    
-
-        driveTrain.setDefaultCommand(new JoystickDrive(driveTrain));
+*/
+        
         //launchSubsystem.setDefaultCommand(new ArmControl(launchSubsystem, armSubsystem, clawSubsystem));
-        buttonBindings();
+       
     }
 
-    /*private void initSubsystem() {
+    /*public void initSubsystem() {
         driveTrain = new DriveSubsystem();
-        launchSubsystem = new LaunchSubsystem();
-        clawSubsystem = new ClawSubsystem();
+        //launchSubsystem = new LaunchSubsystem();
+        //clawSubsystem = new ClawSubsystem();
         armSubsystem = new ArmSubsystem();
         midArmSubsystem = new MidArmSubsystem();
     }*/
@@ -99,11 +102,11 @@ public class RobotContainer {
         new JoystickButton(joystickSub, 7).whenHeld(clawOpen);
         new JoystickButton(joystickSub, 8).whenHeld(clawClose);
 
-        new JoystickButton(joystickSub, 9).whenHeld(middleArmDown);
-        new JoystickButton(joystickSub, 10).whenHeld(middleArmUp);
+        new JoystickButton(joystickSub, 9).whenPressed(new MiddleArmDown(midArmSubsystem));
+        new JoystickButton(joystickSub, 10).whenPressed(new MiddleArmUp(midArmSubsystem));
 
-        new JoystickButton(joystickSub, 11).whenHeld(lowerArmDown);
-        new JoystickButton(joystickSub, 12).whenHeld(lowerArmUp);
+        new JoystickButton(joystickSub, 11).whenPressed(new LowerArmDown(armSubsystem));
+        new JoystickButton(joystickSub, 12).whenPressed(new LowerArmUp(armSubsystem));
 
     }
 
