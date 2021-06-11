@@ -24,6 +24,8 @@ public class ArmSubsystem extends SubsystemBase {
 
     VictorSPX armBase = new VictorSPX(BASE_ARM);
 
+    
+
     public void lowerArmUp () {
         double max = maxSpeed.getDouble(1.0);
         armBase.set(ControlMode.PercentOutput, max);
