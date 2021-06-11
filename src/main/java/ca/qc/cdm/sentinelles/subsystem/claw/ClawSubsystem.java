@@ -23,24 +23,23 @@ public class ClawSubsystem extends SubsystemBase {
 
     private ShuffleboardTab tab = Shuffleboard.getTab("Arm");
     private NetworkTableEntry maxSpeed = 
-            tab.add("Max Speed Claw", 1)
+            tab.add("Max Speed Claw", 0.05)
                 .withWidget(BuiltInWidgets.kNumberSlider)
                 .withProperties(Map.of("min", 0, "max", 1))
                 .getEntry();
 
-    private void init() {
-        
+    public void init() {
         clawSlave.follow(clawMaster);
         clawSlave.setInverted(InvertType.OpposeMaster);
     }
 
     public void clawOpen () {
-        double max = maxSpeed.getDouble(1.0);
+        double max = maxSpeed.getDouble(0.05);
         clawMaster.set(ControlMode.PercentOutput, max);
     }
 
     public void clawClose () {
-        double max = maxSpeed.getDouble(-1.0);
+        double max = maxSpeed.getDouble(0.05);
         clawMaster.set(ControlMode.PercentOutput, max);
     }
 }

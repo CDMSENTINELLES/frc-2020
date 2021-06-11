@@ -13,7 +13,7 @@ public class ClawClose extends CommandBase {
 
     @Override
     public void initialize() {
-
+        clawSubsystem.init();
     }
     
     @Override

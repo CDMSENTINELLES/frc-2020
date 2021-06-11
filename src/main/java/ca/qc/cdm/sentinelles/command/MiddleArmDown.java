@@ -1,14 +1,14 @@
 package ca.qc.cdm.sentinelles.command;
 
-import ca.qc.cdm.sentinelles.subsystem.launch.LaunchSubsystem;
+import ca.qc.cdm.sentinelles.subsystem.midarm.MidArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class MiddleArmDown extends CommandBase {
-    private final LaunchSubsystem launchSubsystem;
+    private final MidArmSubsystem midArmSubsystem;
 
-    public MiddleArmDown(LaunchSubsystem launchSubsystem) {
-        this.launchSubsystem = launchSubsystem;
-        addRequirements(launchSubsystem);
+    public MiddleArmDown(MidArmSubsystem midArmSubsystem) {
+        this.midArmSubsystem = midArmSubsystem;
+        addRequirements(midArmSubsystem);
     }
 
     @Override
@@ -18,7 +18,7 @@ public class MiddleArmDown extends CommandBase {
     
     @Override
     public void execute() {
-        launchSubsystem.middleArmDown();
+        midArmSubsystem.midArmDown();
     }
 
     @Override

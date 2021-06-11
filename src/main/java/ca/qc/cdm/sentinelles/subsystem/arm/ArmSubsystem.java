@@ -17,7 +17,7 @@ import java.util.Map;
 public class ArmSubsystem extends SubsystemBase {
     private ShuffleboardTab tab = Shuffleboard.getTab("Arm");
     public NetworkTableEntry maxSpeed = 
-            tab.add("Max Speed Arm Base", 1)
+            tab.add("Max Speed Arm Base", 0.25)
                 .withWidget(BuiltInWidgets.kNumberSlider)
                 .withProperties(Map.of("min", 0, "max", 1))
                 .getEntry();
@@ -27,12 +27,12 @@ public class ArmSubsystem extends SubsystemBase {
     
 
     public void lowerArmUp () {
-        double max = maxSpeed.getDouble(1.0);
+        double max = maxSpeed.getDouble(0.05);
         armBase.set(ControlMode.PercentOutput, max);
     }
 
     public void lowerArmDown () {
-        double max = maxSpeed.getDouble(-1.0);
+        double max = maxSpeed.getDouble(0.05);
         armBase.set(ControlMode.PercentOutput, max);
     }
 }

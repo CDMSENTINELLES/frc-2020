@@ -1,6 +1,5 @@
 package ca.qc.cdm.sentinelles;
 
-import ca.qc.cdm.sentinelles.command.ArmControl;
 import ca.qc.cdm.sentinelles.command.ClawClose;
 import ca.qc.cdm.sentinelles.command.ClawOpen;
 import ca.qc.cdm.sentinelles.command.JoystickDrive;
@@ -13,6 +12,7 @@ import ca.qc.cdm.sentinelles.subsystem.arm.ArmSubsystem;
 import ca.qc.cdm.sentinelles.subsystem.claw.ClawSubsystem;
 import ca.qc.cdm.sentinelles.subsystem.drive.DriveSubsystem;
 import ca.qc.cdm.sentinelles.subsystem.launch.LaunchSubsystem;
+import ca.qc.cdm.sentinelles.subsystem.midarm.MidArmSubsystem;
 import ca.qc.cdm.sentinelles.Constants.JoystickConstants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
@@ -35,27 +35,32 @@ public class RobotContainer {
     
     private ArmSubsystem armSubsystem;
 
+    private MidArmSubsystem midArmSubsystem;
+
     private final Joystick joystickSub = new Joystick(JoystickConstants.JOYSTICK_SUB_PORT);
 
     private final CommandBase clawOpen = new ClawOpen(clawSubsystem);
     private final CommandBase clawClose = new ClawClose(clawSubsystem);
 
-    private final CommandBase middleArmDown = new MiddleArmDown(launchSubsystem);
-    private final CommandBase middleArmUp = new MiddleArmUp(launchSubsystem);
+    private final CommandBase middleArmDown = new MiddleArmDown(midArmSubsystem);
+    private final CommandBase middleArmUp = new MiddleArmUp(midArmSubsystem);
     
     private final CommandBase lowerArmDown = new LowerArmDown(armSubsystem);
     private final CommandBase lowerArmUp = new LowerArmUp(armSubsystem);
-    
-  
-   
-    
 
     // Commands
     private final Command autoCommand = new NullCommand();
 
     public RobotContainer() {
-        initSubsystem();
-        buttonBindings();
+        //initSubsystem();
+        clawOpen.setName("Open Claw");
+        clawClose.setName("Close Claw");
+
+        middleArmDown.setName("Middle Arm (NEO) down");
+        middleArmUp.setName("Middle Arm (NEO) up");
+        
+        lowerArmDown.setName("Lower Arm (VICTOR) down");
+        lowerArmUp.setName("Lower Arm (Victor) up");
 
 
         CommandScheduler.getInstance()
@@ -79,14 +84,16 @@ public class RobotContainer {
 
         driveTrain.setDefaultCommand(new JoystickDrive(driveTrain));
         //launchSubsystem.setDefaultCommand(new ArmControl(launchSubsystem, armSubsystem, clawSubsystem));
+        buttonBindings();
     }
 
-    private void initSubsystem() {
+    /*private void initSubsystem() {
         driveTrain = new DriveSubsystem();
         launchSubsystem = new LaunchSubsystem();
         clawSubsystem = new ClawSubsystem();
         armSubsystem = new ArmSubsystem();
-    }
+        midArmSubsystem = new MidArmSubsystem();
+    }*/
 
     private void buttonBindings() {
         new JoystickButton(joystickSub, 7).whenHeld(clawOpen);
