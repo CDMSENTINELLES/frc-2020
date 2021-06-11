@@ -1,6 +1,5 @@
 package ca.qc.cdm.sentinelles.command;
 
-import ca.qc.cdm.sentinelles.subsystem.launch.LaunchSubsystem;
 import ca.qc.cdm.sentinelles.subsystem.midarm.MidArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
