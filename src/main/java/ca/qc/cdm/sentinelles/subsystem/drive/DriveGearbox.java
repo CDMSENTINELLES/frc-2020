@@ -2,13 +2,16 @@ package ca.qc.cdm.sentinelles.subsystem.drive;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.music.Orchestra;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static ca.qc.cdm.sentinelles.Constants.DriveConstants.TIMEOUT_MS;
 import static com.ctre.phoenix.motorcontrol.NeutralMode.Brake;
 
 public class DriveGearbox {
+    public Orchestra _orchestra;
     private static final int SLOT_ID = 0;
 
     private final WPI_TalonFX master;
@@ -35,6 +38,13 @@ public class DriveGearbox {
 
         slave.follow(master);
 
+        ArrayList<TalonFX> _instruments = new ArrayList<TalonFX>();
+
+        _orchestra = new Orchestra(_instruments);
+
+        _orchestra.loadMusic("eye_of_tiger.chrp");
+        _orchestra.play();
+
         // TODO read the DOC
 //        master.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, TIMEOUT_MS);
 //        master.setStatusFramePeriod(Status_12_Feedback1, 20, TIMEOUT_MS);
@@ -51,7 +61,7 @@ public class DriveGearbox {
 
         motors.forEach(motor -> {
             motor.configFactoryDefault();
-
+            _instruments.add(motor);
             motor.setSensorPhase(true);
             motor.config_kP(SLOT_ID, 0.1, TIMEOUT_MS);
             motor.config_kI(SLOT_ID, 0, TIMEOUT_MS);
